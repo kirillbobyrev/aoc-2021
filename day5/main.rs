@@ -1,6 +1,5 @@
 use clap::Parser;
 use regex::Regex;
-use std::error::Error;
 
 #[derive(Parser)]
 struct Opts {
@@ -10,18 +9,17 @@ struct Opts {
 
 const SIZE: usize = 1000;
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main() {
     let opts = Opts::parse();
-    let input = include_str!("input.txt");
-    let re = Regex::new(r"(^\d+),(\d+) -> (\d+),(\d+)$")?;
+    let re = Regex::new(r"(^\d+),(\d+) -> (\d+),(\d+)$").unwrap();
     let mut board = [[0; SIZE]; SIZE];
-    for line in input.lines() {
+    for line in include_str!("input.txt").lines() {
         let capture = re.captures(line).unwrap();
         let (mut x, mut y, x2, y2) = (
-            capture[1].parse::<i32>()?,
-            capture[2].parse::<i32>()?,
-            capture[3].parse::<i32>()?,
-            capture[4].parse::<i32>()?,
+            capture[1].parse::<i32>().unwrap(),
+            capture[2].parse::<i32>().unwrap(),
+            capture[3].parse::<i32>().unwrap(),
+            capture[4].parse::<i32>().unwrap(),
         );
         let (dx, dy) = (num::signum(x2 - x), num::signum(y2 - y));
         // Don't allow diagonal lines in part 1.
@@ -29,12 +27,11 @@ fn main() -> Result<(), Box<dyn Error>> {
             continue;
         }
         board[x2 as usize][y2 as usize] += 1;
-        while x != x2 || y != y2 {
+        while (x, y) != (x2, y2) {
             board[x as usize][y as usize] += 1;
             x += dx;
             y += dy;
         }
     }
     println!("{}", board.iter().flatten().filter(|x| **x > 1).count());
-    Ok(())
 }
