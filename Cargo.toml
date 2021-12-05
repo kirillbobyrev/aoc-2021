@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 clap = "3.0.0-beta.5"
+regex = "1.0"
 
 [[bin]]
 name = "day1"
@@ -23,3 +24,7 @@ path = "day3/main.rs"
 [[bin]]
 name = "day4"
 path = "day4/main.rs"
+
+[[bin]]
+name = "day5"
+path = "day5/main.rs"
