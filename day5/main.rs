@@ -1,6 +1,5 @@
 use clap::Parser;
 use regex::Regex;
-use std::cmp::Ordering;
 use std::error::Error;
 
 #[derive(Parser)]
@@ -10,14 +9,6 @@ struct Opts {
 }
 
 const SIZE: usize = 1000;
-
-fn delta(from: i32, to: i32) -> i32 {
-    match from.cmp(&to) {
-        Ordering::Greater => -1,
-        Ordering::Less => 1,
-        Ordering::Equal => 0,
-    }
-}
 
 fn main() -> Result<(), Box<dyn Error>> {
     let opts = Opts::parse();
@@ -32,7 +23,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             capture[3].parse::<i32>()?,
             capture[4].parse::<i32>()?,
         );
-        let (dx, dy) = (delta(x, x2), delta(y, y2));
+        let (dx, dy) = (num::signum(x2 - x), num::signum(y2 - y));
         // Don't allow diagonal lines in part 1.
         if opts.part == 1 && dx != 0 && dy != 0 {
             continue;
