@@ -7,8 +7,8 @@ Code and inputs for each day are in the corresponding directory, run the code
 for Day 1 (Part 1) with
 
 ```bash
-$ cargo run --bin day1-1
+$ cargo run --bin day5 1
   Finished dev [unoptimized + debuginfo] target(s) in 0.00s
-    Running `target/debug/day1-1`
-This is day 1, part 1!
+    Running `target/debug/day5`
+This is day 5, part 1!
 ```
