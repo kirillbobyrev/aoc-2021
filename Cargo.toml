@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 clap = "3.0.0-beta.5"
+itertools = "0.9"
 num = "0.4"
 regex = "1.0"
 
@@ -37,3 +38,7 @@ path = "day6/main.rs"
 [[bin]]
 name = "day7"
 path = "day7/main.rs"
+
+[[bin]]
+name = "day8"
+path = "day8/main.rs"
